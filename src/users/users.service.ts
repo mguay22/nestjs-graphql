@@ -9,7 +9,14 @@ import { User } from "./models/user";
 
 @Injectable()
 export class UsersService {
-    private users: User[] = [];
+    private users: User[] = [
+        {
+            email: 'dan@example.com',
+            password: 'mypassword',
+            userId: '123',
+            age: 20,
+        }
+    ];
 
     public createUser(createUserData: CreateUserInput): User {
         const user: User = {
@@ -32,6 +39,10 @@ export class UsersService {
 
     public getUser(getUserArgs: GetUserArgs): User {
         return this.users.find(user => user.userId === getUserArgs.userId);
+    }
+
+    public getUserByEmail(email: string): User | undefined {
+        return this.users.find(user => user.email === email);
     }
 
     public getUsers(getUsersArgs: GetUsersArgs): User[] {
